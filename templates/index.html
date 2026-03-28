@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CLO835 Final Project</title>
+    <style>
+        body {
+            {% if bg_image %}
+            background-image: url('{{ bg_image }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            {% else %}
+            background-color: #f4f4f4;
+            {% endif %}
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+        .overlay {
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 20px 30px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>{{ header_name }}</h1>
+        <h2>CLO835 Final Project</h2>
+        <p>Flask app running on Amazon EKS</p>
+    </div>
+</body>
+</html>
