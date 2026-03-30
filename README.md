@@ -1,2 +1,1 @@
-# CLO835-Project.
-This project works!
+# CLO835-Project
