@@ -5,6 +5,7 @@ on:
     branches:
       - main
     types: [opened, synchronize, reopened]
+
   push:
     branches:
       - main
@@ -39,6 +40,7 @@ jobs:
         run: pytest -v
 
   build-and-push:
+    name: Build and Push to ECR
     if: github.event_name == 'push'
     needs: test
     runs-on: ubuntu-latest
@@ -47,6 +49,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ✅ FIXED AWS AUTH (includes session token)
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -60,7 +63,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
-        run: docker build -t $ECR_REPOSITORY:latest .
+        run: |
+          docker build -t $ECR_REPOSITORY:latest .
 
       - name: Tag Docker image
         run: |
@@ -69,4 +73,5 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push ${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:latest
+          docker push \
+            ${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:latest
