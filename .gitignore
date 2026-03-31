@@ -1,0 +1,5 @@
+commands.txt
+*.log
+.env
+node_modules/
+__pycache__/
