@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLO835 Final Project</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
             {% if bg_image %}
             background-image: url('{{ bg_image }}');
+            {% endif %}
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            {% else %}
-            background-color: #f4f4f4;
-            {% endif %}
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-            padding-top: 80px;
+            min-height: 100vh;
         }
+
         .overlay {
-            background: rgba(0,0,0,0.5);
-            display: inline-block;
-            padding: 20px 30px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.45);
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
         }
     </style>
 </head>
 <body>
     <div class="overlay">
         <h1>{{ header_name }}</h1>
-        <h2>CLO835 Final Project</h2>
-        <p>Flask app running on Amazon EKS</p>
     </div>
 </body>
 </html>

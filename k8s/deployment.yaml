@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clo835-app
+  namespace: final
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: clo835-app
+  template:
+    metadata:
+      labels:
+        app: clo835-app
+    spec:
+      serviceAccountName: clo835
+      containers:
+        - name: clo835-app
+          image: 432795166334.dkr.ecr.us-east-1.amazonaws.com/clo835-final-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 81
+          env:
+            - name: HEADER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: HEADER_NAME
+            - name: S3_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: S3_BUCKET
+            - name: S3_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: S3_KEY
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: AWS_REGION
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: DBHOST
+            - name: DBPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: DBPORT
+            - name: DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: clo835-config
+                  key: DATABASE
+            - name: DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: clo835-secret
+                  key: DBUSER
+            - name: DBPWD
+              valueFrom:
+                secretKeyRef:
+                  name: clo835-secret
+                  key: DBPWD

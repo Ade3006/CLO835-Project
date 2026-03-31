@@ -1,8 +1,6 @@
 import os
 import logging
 from flask import Flask, render_template
-import boto3
-from botocore.exceptions import ClientError
 import pymysql
 
 app = Flask(__name__)
@@ -18,24 +16,22 @@ DATABASE = os.getenv("DATABASE", "employees")
 HEADER_NAME = os.getenv("HEADER_NAME", "Ade")
 S3_BUCKET = os.getenv("S3_BUCKET", "")
 S3_KEY = os.getenv("S3_KEY", "")
-LOCAL_IMAGE_DIR = "static/images"
-LOCAL_IMAGE_FILE = "background.jpg"
-LOCAL_IMAGE_PATH = f"{LOCAL_IMAGE_DIR}/{LOCAL_IMAGE_FILE}"
+AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
 
-def download_background():
+
+def build_public_s3_url() -> str:
     if not S3_BUCKET or not S3_KEY:
         logging.warning("S3 bucket or key not set.")
-        return
+        return ""
 
-    os.makedirs(LOCAL_IMAGE_DIR, exist_ok=True)
-    logging.info(f"Background image S3 path: s3://{S3_BUCKET}/{S3_KEY}")
+    if AWS_REGION == "us-east-1":
+        image_url = f"https://{S3_BUCKET}.s3.amazonaws.com/{S3_KEY}"
+    else:
+        image_url = f"https://{S3_BUCKET}.s3.{AWS_REGION}.amazonaws.com/{S3_KEY}"
 
-    s3 = boto3.client("s3", region_name=os.getenv("AWS_REGION", "us-east-1"))
-    try:
-        s3.download_file(S3_BUCKET, S3_KEY, LOCAL_IMAGE_PATH)
-        logging.info(f"Downloaded background image to {LOCAL_IMAGE_PATH}")
-    except ClientError as e:
-        logging.error(f"Failed to download image from S3: {e}")
+    logging.info(f"Using public S3 image URL: {image_url}")
+    return image_url
+
 
 def get_db_connection():
     return pymysql.connect(
@@ -43,18 +39,16 @@ def get_db_connection():
         user=DBUSER,
         password=DBPWD,
         database=DATABASE,
-        port=DBPORT
+        port=DBPORT,
+        connect_timeout=5
     )
+
 
 @app.route("/")
 def home():
-    if not os.path.exists(LOCAL_IMAGE_PATH):
-        download_background()
+    bg_image = build_public_s3_url()
+    return render_template("index.html", header_name=HEADER_NAME, bg_image=bg_image)
 
-    image_exists = os.path.exists(LOCAL_IMAGE_PATH)
-    image_path = f"/{LOCAL_IMAGE_PATH}" if image_exists else ""
-    return render_template("index.html", header_name=HEADER_NAME, bg_image=image_path)
 
 if __name__ == "__main__":
-    download_background()
     app.run(host="0.0.0.0", port=81)
