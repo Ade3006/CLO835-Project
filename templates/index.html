@@ -6,11 +6,6 @@
     <title>CLO835 Final Project</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
             {% if bg_image %}
             background-image: url('{{ bg_image }}');
             {% endif %}
@@ -18,23 +13,65 @@
             background-repeat: no-repeat;
             background-position: center;
             min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
         }
 
         .overlay {
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.55);
             min-height: 100vh;
-            padding-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .content {
+            max-width: 900px;
         }
 
         h1 {
-            font-size: 3rem;
-            margin: 0;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .members {
+            margin-top: 20px;
+            line-height: 1.8;
         }
     </style>
 </head>
 <body>
     <div class="overlay">
-        <h1>{{ header_name }}</h1>
+        <div class="content">
+            <h1>CLO835 Final Project Page</h1>
+            <h2>Project: Containerized Flask Application Deployment on AWS EKS</h2>
+
+            <p><strong>Environment:</strong> AWS Cloud9, GitHub, Amazon ECR, Amazon EKS</p>
+            <p><strong>Professor:</strong> Lak Adunuthala</p>
+
+            <div class="members">
+                <p><strong>Group members:</strong></p>
+                <p>Adegboyega Aromolaran</p>
+                <p>Amir Bhandari</p>
+                <p>Dhruv Manojkumar Patel</p>
+            </div>
+
+            <p style="margin-top: 25px;"><strong>April 2026</strong></p>
+        </div>
     </div>
 </body>
 </html>
