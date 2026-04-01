@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About This Project</title>
+    <style>
+        body {
+            {% if bg_image %}
+            background-image: url('{{ bg_image }}');
+            {% endif %}
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.55);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.92);
+            color: black;
+            padding: 25px;
+            max-width: 800px;
+            margin: auto;
+            border-radius: 12px;
+        }
+
+        a {
+            color: #0b57d0;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="box">
+            <h1>CLO835 Final Project Page</h1>
+            <p><strong>Welcome:</strong> {{ header_name }}</p>
+            <p><strong>Project:</strong> Containerized Flask Application Deployment on AWS EKS</p>
+            <p><strong>Environment:</strong> AWS Cloud9, GitHub, Amazon ECR, Amazon EKS</p>
+            <p><strong>Professor:</strong> Lak Adunuthala</p>
+
+            <h2>Group Members</h2>
+            <p>Adegboyega Aromolaran</p>
+            <p>Amir Bhandari</p>
+            <p>Dhruv Manojkumar Patel</p>
+
+            <p><strong>April 2026</strong></p>
+
+            <p><a href="/">Back Home</a></p>
+            <p><a href="/getemp">Search Employee</a></p>
+        </div>
+    </div>
+</body>
+</html>

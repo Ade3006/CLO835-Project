@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <style>
+        body {
+            {% if bg_image %}
+            background-image: url('{{ bg_image }}');
+            {% endif %}
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.55);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.92);
+            color: black;
+            padding: 25px;
+            max-width: 700px;
+            margin: auto;
+            border-radius: 12px;
+        }
+
+        a {
+            color: #0b57d0;
+            text-decoration: none;
+        }
+
+        .result p {
+            margin: 12px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="box">
+            <h1>Employee Details</h1>
+            <p><strong>Welcome:</strong> {{ header_name }}</p>
+
+            <div class="result">
+                <p><strong>ID:</strong> {{ id }}</p>
+                <p><strong>First Name:</strong> {{ fname }}</p>
+                <p><strong>Last Name:</strong> {{ lname }}</p>
+                <p><strong>Primary Skill:</strong> {{ interest }}</p>
+                <p><strong>Location:</strong> {{ location }}</p>
+            </div>
+
+            <p><a href="/getemp">Search Again</a></p>
+            <p><a href="/">Back Home</a></p>
+            <p><a href="/about">About This Project</a></p>
+        </div>
+    </div>
+</body>
+</html>

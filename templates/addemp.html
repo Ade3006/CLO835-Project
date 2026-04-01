@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <style>
+        body {
+            {% if bg_image %}
+            background-image: url('{{ bg_image }}');
+            {% endif %}
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.55);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.92);
+            color: black;
+            padding: 25px;
+            max-width: 750px;
+            margin: auto;
+            border-radius: 12px;
+        }
+
+        h1, h2, h3, p {
+            margin-top: 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 14px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+
+        a {
+            color: #0b57d0;
+            text-decoration: none;
+        }
+
+        .nav-links p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="box">
+            <h1>CLO835 Final Project Page</h1>
+            <h2>Project: Containerized Flask Application Deployment on AWS EKS</h2>
+            <p><strong>Environment:</strong> AWS Cloud9, GitHub, Amazon ECR, Amazon EKS</p>
+            <p><strong>Professor:</strong> Lak Adunuthala</p>
+            <p><strong>Welcome:</strong> {{ header_name }}</p>
+
+            <h3>Group Members</h3>
+            <p>Adegboyega Aromolaran</p>
+            <p>Amir Bhandari</p>
+            <p>Dhruv Manojkumar Patel</p>
+            <p><strong>April 2026</strong></p>
+
+            <hr>
+
+            <h2>Add Employee</h2>
+            <form action="/addemp" method="POST">
+                <label for="emp_id">Employee ID</label>
+                <input type="text" id="emp_id" name="emp_id" required>
+
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <label for="primary_skill">Primary Skill</label>
+                <input type="text" id="primary_skill" name="primary_skill" required>
+
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required>
+
+                <button type="submit">Add Employee</button>
+            </form>
+
+            <div class="nav-links">
+                <p><a href="/getemp">Search Employee</a></p>
+                <p><a href="/about">About This Project</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
