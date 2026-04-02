@@ -6,7 +6,7 @@ metadata:
 data:
   HEADER_NAME: "Ade"
   S3_BUCKET: "clo835-project-bucket01"
-  S3_KEY: "images/background2.jpg"
+  S3_KEY: "images/background1.jpg"
   AWS_REGION: "us-east-1"
   DBHOST: "mysql"
   DBPORT: "3306"
